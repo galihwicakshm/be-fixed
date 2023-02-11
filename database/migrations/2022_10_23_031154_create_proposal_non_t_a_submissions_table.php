@@ -25,7 +25,7 @@ class CreateProposalNontaSubmissionsTable extends Migration
             $table->string('ram');
             $table->string('storage');
             $table->string('peneliti');
-            $table->string('partner');
+            $table->string('partner')->nullable();
             $table->string('duration');
             $table->string('research_title');
             $table->text('short_description');

@@ -58,7 +58,6 @@ class RevisiController extends Controller
                 'status' => 'Revision'
             ]);
 
-
             $data_submission->update([
                 'status' => 'Revision'
             ]);

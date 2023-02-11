@@ -55,7 +55,7 @@ class ProposalNonTASubmissionController extends Controller
                     'gt:0',
                 ],
                 'peneliti' => [
-                    'required_if:partner,other',
+                    'required',
                 ],
                 'duration' => [
                     'required',
