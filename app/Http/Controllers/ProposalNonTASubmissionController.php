@@ -10,6 +10,7 @@ use App\Jobs\RevisionEmailJob;
 use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
 use App\Notifications\ProposalMasuk;
+use Illuminate\Support\Facades\Auth;
 use App\Models\ProposalNonTASubmission;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Storage;
@@ -414,11 +415,11 @@ class ProposalNonTASubmissionController extends Controller
                 'study_program' => [
                     'required',
                 ],
-                'application_file' => [
-                    'required',
-                    'file',
-                    'mimes:pdf',
-                ],
+                // 'application_file' => [
+                //     'required',
+                //     'file',
+                //     'mimes:pdf',
+                // ],
                 'gpu' => [
                     'required',
                     'numeric',
@@ -437,9 +438,9 @@ class ProposalNonTASubmissionController extends Controller
                 'peneliti' => [
                     'required',
                 ],
-                'partner' => [
-                    'required',
-                ],
+                // 'partner' => [
+                //     'required',
+                // ],
 
                 'duration' => [
                     'required',
@@ -464,20 +465,20 @@ class ProposalNonTASubmissionController extends Controller
                 'output_plan' => [
                     'required',
                 ],
-                'research_fee' => [
-                    'required',
-                    'numeric',
-                ],
-                'proposal_file' => [
-                    'required',
-                    'file',
-                    'mimes:pdf',
-                ],
-                'anggaran_file' => [
-                    'required',
-                    'file',
-                    'mimes:pdf',
-                ],
+                // 'research_fee' => [
+                //     'required',
+                //     'numeric',
+                // ],
+                // 'proposal_file' => [
+                //     'required',
+                //     'file',
+                //     'mimes:pdf',
+                // ],
+                // 'anggaran_file' => [
+                //     'required',
+                //     'file',
+                //     'mimes:pdf',
+                // ],
             ]
         );
 
@@ -522,14 +523,15 @@ class ProposalNonTASubmissionController extends Controller
 
                 $file->storeAs('anggaran', $newName, 'minio');
                 $linkAnggaran = $newName;
-            } else {
-                $data = [
-                    'validation_errors' => [
-                        'anggaran_file' => 'File tidak ditemukan.'
-                    ]
-                ];
-                return ResponseFormatter::validation_error('Error Proposal File', $data);
             }
+            // } else {
+            //     $data = [
+            //         'validation_errors' => [
+            //             'anggaran_file' => 'File tidak ditemukan.'
+            //         ]
+            //     ];
+            //     return ResponseFormatter::validation_error('Error Proposal File', $data);
+            // }
 
             if ($request->shared_data === "yes") {
                 $shared_data = 1;
@@ -539,11 +541,12 @@ class ProposalNonTASubmissionController extends Controller
 
 
 
-            if ($request->term_and_condition === "agree") {
-                $term_and_condition = 1;
-            } else {
-                $term_and_condition = 0;
-            }
+            // if ($request->term_and_condition === "agree") {
+            //     $term_and_condition = 1;
+            // } else {
+            //     $term_and_condition = 0;
+            // }
+
 
             ProposalNonTASubmission::where('id', $id)
                 ->update([
@@ -565,11 +568,11 @@ class ProposalNonTASubmissionController extends Controller
                     'activity_plan' => $request->activity_plan,
                     'output_plan' => $request->output_plan,
                     'previous_experience' => $request->previous_experience,
-                    'docker_image' => $request->docker_image,
-                    'research_fee' => $request->research_fee,
-                    'proposal_file' => $link,
-                    'anggaran_file' => $linkAnggaran,
-                    'term_and_condition' => $term_and_condition,
+                    // 'docker_image' => $request->docker_image,
+                    // 'research_fee' => $request->research_fee,
+                    // 'proposal_file' => $link,
+                    // 'anggaran_file' => $linkAnggaran,
+                    // 'term_and_condition' => $term_and_condition,
                     'status' => 'Pending',
                     'rev_description' => null,
                 ]);

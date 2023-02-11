@@ -54,6 +54,9 @@ class RevisiController extends Controller
 
             $data_nonta = Revisian::join('proposal_non_t_a_submissions', 'proposal_non_t_a_submissions.id', '=', 'revisians.proposal_id')->where('proposal_non_t_a_submissions.id', $request->proposal_id);
 
+
+
+
             $data_industri->update([
                 'status' => 'Revision'
             ]);
